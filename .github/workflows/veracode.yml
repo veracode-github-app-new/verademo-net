@@ -17,7 +17,7 @@ jobs:
         run: |
           cd app
           dotnet restore
-          dotnet publish -p:UseAppHost=False -p:MapFileExtensions=False -c Debug -o ./output
+          dotnet publish -p:UseAppHost=False -p:MapFileExtensions=False -c Release -o ./output
           
       - name: Create zip archive
         run: |
