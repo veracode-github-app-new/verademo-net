@@ -30,7 +30,7 @@ jobs:
           path: app/veracode.zip
           
       - name: Veracode Upload and Scan Action Step
-        uses: veracode/uploadandscan-action@add-delay-after-deleteincompletescan
+        uses: veracode/uploadandscan-action@main
         id: upload_and_scan
         with:
           appname: 'verademo-net'
