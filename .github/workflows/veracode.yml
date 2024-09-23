@@ -16,6 +16,7 @@ jobs:
           
       - name: Build
         run: |
+          cd app
           dotnet restore
           dotnet publish -p:UseAppHost=False -p:MapFileExtensions=False -c Debug -o ./output
           
