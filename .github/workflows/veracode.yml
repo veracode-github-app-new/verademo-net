@@ -28,3 +28,24 @@ jobs:
         with:
           name: veracode-artifact
           path: app/veracode.zip
+          
+      - name: Veracode Upload and Scan Action Step
+        uses: veracode/uploadandscan-action@add-delay-after-deleteincompletescan
+        id: upload_and_scan
+        with:
+          appname: 'verademo-net'
+          createprofile: true
+          policy: 'Verademo Policy'
+          version: '${{ github.run_id }}'
+          filepath: ./app/veracode.zip
+          deleteincompletescan: true
+          vid: '${{ secrets.VERACODE_API_ID }}'
+          vkey: '${{ secrets.VERACODE_API_KEY }}'
+          #scanpollinginterval: 30
+          scantimeout: 60
+          failbuild: false
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: veracode-results
+          path: policy_flaws.json
