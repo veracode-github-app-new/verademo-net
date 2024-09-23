@@ -1,0 +1,5 @@
+app/bin/
+app/obj/
+app/app.csproj.user
+app/Properties/launchSettings.json
+/app/.vs/app/FileContentIndex/132a8ca4-070f-4abf-a68c-57f7375150fd.vsidx
