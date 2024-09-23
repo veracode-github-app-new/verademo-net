@@ -1,5 +1,4 @@
-name: Veracode Build Java Maven Application
-
+name: Veracode Build DotNet Application
 on:
   workflow_dispatch:
   
@@ -21,9 +20,11 @@ jobs:
           dotnet publish -p:UseAppHost=False -p:MapFileExtensions=False -c Debug -o ./output
           
       - name: Create zip archive
-        run: zip -r veracode.zip ./output
+        run: |
+          cd app
+          zip -r veracode.zip ./output
 
       - uses: actions/upload-artifact@v4
         with:
           name: veracode-artifact
-          path: veracode.zip
+          path: app/veracode.zip
