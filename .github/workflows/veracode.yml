@@ -45,7 +45,10 @@ jobs:
           scantimeout: 60
           failbuild: false
 
-      - uses: actions/upload-artifact@v4
+      - name: Convert Policy scan output to SARIF format
+        id: convert
+        uses: veracode/veracode-pipeline-scan-results-to-sarif@v2.0.3
         with:
-          name: veracode-results
-          path: policy_flaws.json
+          scan-type: 'policy'
+          results-json: policy_flaws.json
+          output-results-sarif: veracode-results.sarif
