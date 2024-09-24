@@ -52,3 +52,10 @@ jobs:
           scan-type: 'policy'
           results-json: policy_flaws.json
           output-results-sarif: veracode-results.sarif
+
+      - name: upload sarif file
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: veracode-results
+          path: veracode-results.sarif
