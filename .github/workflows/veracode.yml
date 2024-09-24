@@ -47,7 +47,7 @@ jobs:
 
       - name: Convert Policy scan output to SARIF format
         id: convert
-        uses: veracode/veracode-pipeline-scan-results-to-sarif@v2.0.3
+        uses: veracode/veracode-pipeline-scan-results-to-sarif@fix-no-filename
         with:
           scan-type: 'policy'
           results-json: policy_flaws.json
