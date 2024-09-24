@@ -8,42 +8,42 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '8.0.x'
+      # - name: Setup .NET Core
+      #   uses: actions/setup-dotnet@v3
+      #   with:
+      #     dotnet-version: '8.0.x'
           
-      - name: Build
-        run: |
-          cd app
-          dotnet restore
-          dotnet publish -p:UseAppHost=False -p:MapFileExtensions=False -c Release -o ./output
+      # - name: Build
+      #   run: |
+      #     cd app
+      #     dotnet restore
+      #     dotnet publish -p:UseAppHost=False -p:MapFileExtensions=False -c Release -o ./output
           
-      - name: Create zip archive
-        run: |
-          cd app
-          zip -r veracode.zip ./output
+      # - name: Create zip archive
+      #   run: |
+      #     cd app
+      #     zip -r veracode.zip ./output
 
-      - uses: actions/upload-artifact@v4
-        with:
-          name: veracode-artifact
-          path: app/veracode.zip
+      # - uses: actions/upload-artifact@v4
+      #   with:
+      #     name: veracode-artifact
+      #     path: app/veracode.zip
           
-      - name: Veracode Upload and Scan Action Step
-        uses: veracode/uploadandscan-action@main
-        id: upload_and_scan
-        with:
-          appname: 'verademo-net'
-          createprofile: true
-          policy: 'Verademo Policy'
-          version: '${{ github.run_id }}'
-          filepath: ./app/veracode.zip
-          deleteincompletescan: true
-          vid: '${{ secrets.VERACODE_API_ID }}'
-          vkey: '${{ secrets.VERACODE_API_KEY }}'
-          #scanpollinginterval: 30
-          scantimeout: 60
-          failbuild: false
+      # - name: Veracode Upload and Scan Action Step
+      #   uses: veracode/uploadandscan-action@main
+      #   id: upload_and_scan
+      #   with:
+      #     appname: 'verademo-net'
+      #     createprofile: true
+      #     policy: 'Verademo Policy'
+      #     version: '${{ github.run_id }}'
+      #     filepath: ./app/veracode.zip
+      #     deleteincompletescan: true
+      #     vid: '${{ secrets.VERACODE_API_ID }}'
+      #     vkey: '${{ secrets.VERACODE_API_KEY }}'
+      #     #scanpollinginterval: 30
+      #     scantimeout: 60
+      #     failbuild: false
 
       - name: Convert Policy scan output to SARIF format
         id: convert
